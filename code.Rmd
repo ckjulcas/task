@@ -1,0 +1,49 @@
+---
+title: "Pretty Doc is Awesome"
+author: "Christian Julca"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+#Summary
+
+I explore [**pressure dataset**](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/pressure.html) available in Rstudio using the `html_pretty` output format in package
+[**prettydoc**](http://github.com/yixuan/prettydoc/) , an alternative
+to `html_document` and `html_vignette` contained in the `rmarkdown` package,
+is able to generate small and nice HTML pages.
+
+# Pressure Dataset Features
+Using inline code is possible extract features of dataset:
+
+* `r nrow(pressure)` observations.
+* `r length(names(pressure))` variables: `r names(pressure)[1]` and `r names(pressure)[2]`
+* Both variables are `r class(pressure$pressure)`
+* `r names(pressure)[1]` has `r sum(is.na(pressure$temperature))` missing values
+* `r names(pressure)[2]` has `r sum(is.na(pressure$pressure))` missing values
+
+
+# Plotting Pressure and Temperature
+
+Feel free to use the `knitr` infrastructure with dozens of tunable options in
+your package vignette.
+
+```{r fig.width=6, fig.height=6, fig.align='center'}
+library(ggplot2)
+ggplot(pressure,aes(x=temperature, y=pressure))+
+  geom_point(size=3)
+```
+
+## Table
+Top 6 rows cars dataset
+```{r}
+library(knitr)
+kable(head(cars,6))
+```
+
